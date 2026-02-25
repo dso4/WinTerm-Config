@@ -1,8 +1,6 @@
 #What PS is opening? "Core" is pwsh.exe (PS7+), "Desktop" is powershell.exe (PS5). Nobody cares about 6.
 $IsPowerShellCore = $PSVersionTable.PSEdition -eq "Core"
 
-Import-Module Terminal-Icons
-
 $OHMP_CONFIG = Join-Path $env:GITPATH "WinTerm-Config\json\catppuccin_latte.omp.json"
 
 # Set PSReadLine colors to match Catppuccin Latte (works on both versions)
@@ -34,6 +32,7 @@ if ($IsPowerShellCore) {
         ListPrediction   = '#9ca0b0'  # overlay0
     }
     
+    Import-Module Terminal-Icons
     # Initialize Oh My Posh for PowerShell Core
     oh-my-posh init pwsh --config $OHMP_CONFIG | Invoke-Expression
 }
@@ -41,6 +40,7 @@ else {
     # PowerShell 5 compatibility mode (powershell.exe) - skip modern features
     Write-Host "PowerShell 5 compatibility mode - prediction features disabled" -ForegroundColor Yellow
     
+    Import-Module Terminal-Icons
     # Initialize Oh My Posh for Windows PowerShell
     oh-my-posh init powershell --config $OHMP_CONFIG | Invoke-Expression
 }
